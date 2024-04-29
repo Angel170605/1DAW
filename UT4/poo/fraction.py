@@ -31,7 +31,7 @@ class Fraction:
         return Fraction((num // simply), (den // simply))
 
     def __str__(self) -> str:
-        return f'La solución es {self.num}/{self.den}'
+        return f'La solucion es {self.num}/{self.den}'
 
     @staticmethod
     def gcd(a: int, b: int) -> int:
