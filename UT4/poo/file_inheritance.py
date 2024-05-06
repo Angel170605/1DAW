@@ -25,11 +25,12 @@ class MediaFile(File):
 
     @property
     def info(self):
-        return f'''
+        mfile_info = f'''
 {self.path} [size={self.size()}B]
 Codec: h264
 Geolocatization: {self.geoloc}
 Duration: {self.duration}s'''
+        return super().info + mfile_info
 
 
 class VideoFile(MediaFile):
@@ -41,6 +42,7 @@ class VideoFile(MediaFile):
 
     @property
     def info(self):
-        return f'''
+        vfile_info = f'''
 {MediaFile.info}
 Dimensions: {self.dimensions}'''
+        return super().info + vfile_info
