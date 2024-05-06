@@ -1,14 +1,12 @@
-n = int(input('Give me a integer number: '))
-
-
-def getint(n: int) -> int:
+def getint():
+    value = int(input('Give me an integer number: '))
     try:
-        if isinstance(n, int):
-            return n
+        value
     except ValueError:
-        print(f'''Not a valid integer. Try it again!''')
-        n = input('Give me a integer number: ')
-        return getint(n)
+        print('Not a valid integer. Try it again!')
+        return getint((input('Give me an integer number')))
+    else:
+        return f'{value}'
 
 
-forza_barça = getint(n)
+get_integer = getint()
