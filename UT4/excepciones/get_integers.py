@@ -1,12 +1,12 @@
-def getint():
-    value = int(input('Give me an integer number: '))
+def getint(value):
     try:
-        value
+        result = int(value)
     except ValueError:
         print('Not a valid integer. Try it again!')
-        return getint((input('Give me an integer number')))
+        return getint((input('Give me an integer number: ')))
     else:
-        return f'{value}'
+        return f'{result}'
 
 
-get_integer = getint()
+value = input('Give me an integer: ')
+get_integer = getint(value)
