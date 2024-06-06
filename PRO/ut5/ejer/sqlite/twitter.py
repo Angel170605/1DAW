@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 import sqlite3
 
 DB_PATH = 'twitter.db'
@@ -16,7 +15,25 @@ def create_db(db_path: str = DB_PATH) -> None:
     - tweet (id, content, user_id, retweet_from)
         └ user_id es clave ajena de user(id)
         └ retweet_from es clave ajena de tweet(id)"""
-    pass
+    con = sqlite3.connect(db_path)
+    cur = con.cursor()
+    create_tables = """
+    CREATE TABLE user(
+    id INTEGER PRIMARY KEY,
+    username TEXT,
+    password TEXT,
+    bio TEXT
+    );
+    CREATE TABLE tweet(
+    id INTEGER PRIMARY KEY,
+    content TEXT,
+    user_id INTEGER REFERENCES user(id),
+    retweet_from INTEGER REFERENCES tweet(id)
+    );
+"""
+    cur.executescript(create_tables)
+    con.commit()
+    con.close()
 
 
 class User:
@@ -25,11 +42,22 @@ class User:
         - Crea los atributos con y cur para la conexión a la base de datos (con factoría Row).
         - Crea los atributos username, password, bio, id y logged.
         """
+        self.con = sqlite3.connect('twitter.db')
+        self.con.row_factory = sqlite3.Row
+        self.cur = self.con.cursor()
+
+        self.username = username
+        self.password = password
+        self.bio = bio
+        self.user_id = user_id
         pass
 
     def save(self) -> None:
         """Guarda en la base de datos un objeto de tipo User.
         Además actualiza el atributo "id" del objeto a partir de lo que devuelve la inserción."""
+        insert_user = 'INSERT INTO user(username, password, bio) VALUES(:username, :password, :bio)'
+        self.cur.execute(insert_user)
+        self.user_id = self.cur.lastrowid
         pass
 
     def login(self, password: str) -> None:
