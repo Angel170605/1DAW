@@ -50,13 +50,15 @@ class User:
         self.password = password
         self.bio = bio
         self.user_id = user_id
+        self.logged = False
         pass
 
     def save(self) -> None:
         """Guarda en la base de datos un objeto de tipo User.
         Además actualiza el atributo "id" del objeto a partir de lo que devuelve la inserción."""
-        insert_user = 'INSERT INTO user(username, password, bio) VALUES(:username, :password, :bio)'
-        self.cur.execute(insert_user)
+        sql = 'INSERT INTO user(username, password, bio) VALUES(:username, :password, :bio)'
+        self.cur.execute(sql)
+        self.con.commit()
         self.user_id = self.cur.lastrowid
         pass
 
@@ -64,6 +66,9 @@ class User:
         """Realiza el login del usuario.
         Comprueba si existe este usuario con el password pasado por parámetro en la BBDD
         y actualiza los atributos correspondientes."""
+        sql = 'SELECT FROM user WHERE username=:username AND password=:password)'
+        self.logged = self.cur.execute(sql, dict(username=self.username, password=self.password)).fetchone() in not None
+
         pass
 
     def tweet(self, content: str) -> Tweet:
@@ -112,34 +117,51 @@ class Tweet:
           Un id válido debe ser mayor o igual que 1.
         - Si es un retweet el contenido debe ser la cadena vacía.
         """
+        self.con = sqlite3.connect('twitter.db')
+        self.con.row_factory = sqlite3.Row
+        self.cur = self.con.cursor()
+
+        self.retweet_from = retweet_from
+        self.tweet_id = tweet_id
+        self.content = '' if self.is_retweet else content
         pass
 
     @property
     def is_retweet(self) -> bool:
         """Indica si el tweet es un retweet."""
-        pass
+        return self.retweet_from > 1
 
     @property
     def content(self) -> str:
         """Devuelve el contenido del tweet.
         - Si es un retweet el contenido habrá que buscarlo en el tweet retuiteado."""
-        pass
+        if self.is_retweet:
+            return cur.execute('SELECT FROM tweet WHERE id=:retweet_from', dict(retweet_from=self.retweet_from)).fetchone()['content']
+        return self.content
 
     def save(self, user: User) -> None:
         """Guarda el tweet en la base de datos.
         - El parámetro user es el usuario que escribe el tweet.
         Además actualiza el atributo "id" del objeto a partir de lo que devuelve la inserción."""
+        sql = 'INSERT INTO tweet(content, user_id, retweet_from) VALUES(:content, :user_id, :retweet_from)'
+        cur.execute(sql, dict(content=self.content, user_id=self.user_id, retweet_from=self.retweet_from))
+        self.con.commit()
+        self.tweet_id = self.cur.lastrowid
+
         pass
 
     def __repr__(self):
         """Representa un tweet con el formato:
         <emoji> <content> (id=<id>)"""
+        emoji = RETWEET_EMOJI if self.is_retweet else TWEET_EMOJI
+        f'{emoji} {self.content} id={self.tweet_id}'
         pass
 
     @classmethod
     def from_db_row(cls, row: sqlite3.Row) -> Tweet:
         """Crea un objeto de tipo Tweet a partir de una fila de consulta SQL"""
-        pass
+        tweet_id, content, user_id, retweet_from = row
+        return Tweet(retweet_from, tweet_id, content)
 
 
 class Twitter:
@@ -147,6 +169,9 @@ class Twitter:
         """Constructor de la clase Twitter.
         - Crea los atributos con y cur para la conexión a la base de datos (con factoría Row)
         """
+        self.con = sqlite3.connect('twitter.db')
+        self.con.row_factory = sqlite3.Row
+        self.cur = self.con.cursor()
         pass
 
     def add_user(self, username: str, password: str, bio: str = '') -> User:
