@@ -79,7 +79,13 @@ class User:
         con el mensaje: User <usuario> is not logged in!
         - Si el tweet supera el límite de caracteres hay que lanzar una excepción de tipo
         TwitterError con el mensaje: Tweet hasta more than 280 chars!"""
-        pass
+        if not self.logged :
+            raise TwitterError(f'User {self.username} is not logged in!')
+        if len(self.content) > 280:
+            raise TwitterError('Tweet has more than 280 chars!')
+        tweet = Tweet(content)
+        tweet.save(self)
+        return tweet
 
     def retweet(self, tweet_id: int) -> Tweet:
         """Crea un retweet con el contenido indicado y lo almacena en la base de datos.
@@ -89,23 +95,34 @@ class User:
         con el mensaje: User <usuario> is not logged in!
         - Si tweet_id no existe en la base de datos hay que lanzar una excepción de tipo
         TwitterError con el mensaje: Tweet with id <id> does not exist!"""
-        pass
+        sql = cur.execute('SELECT id FROM tweet WHERE id=:id', dict(id=tweet_id))
+        if not self.logged :
+            raise TwitterError(f'User {self.username} is not logged in!')
+        if sql.fetchone() is None:
+            raise TwitterError('Tweet with id {tweet_id} does not exist!')
+        tweet_content = cur.execute('SELECT content FROM tweet WHERE id=:tweet_id', dict(id=tweet_id)).fecthone()
+        retweet = Tweet(tweet_content, tweet_id)
+        retweet.save(self)
+        return retweet
 
     @property
     def tweets(self):
         """Función generadora que devuelve todos los tweets propios del usuario.
         - Lo que se devuelven son objetos de tipo Tweet (usar el método from_db_row)."""
-        pass
+        for row in self.cur.execute('SELECT * FROM tweet WHERE user_id = :user_id', dict(user_id=self.id)):
+            Yield Tweet.from_db_row(row)
 
     def __repr__(self):
         """Representa un usuario con el formato:
         <usuario>: <bio>"""
-        pass
+        return f'{self.username}: {self.bio}'
+        
 
     @classmethod
     def from_db_row(cls, row: sqlite3.Row):
         """Crea un objeto de tipo User a partir de una fila de consulta SQL"""
-        pass
+        user_id, username, password, bio = row 
+        return User(username, password, bio, user_id)
 
 
 class Tweet:
@@ -185,14 +202,25 @@ class Twitter:
           * Terminar con una exclamación o un asterisco.
         Si no sigue este formato hay que elevar una excepción de tipo TwitterError
         con el mensaje: Password does not follow security rules!"""
+        valid_password_type = r'[@=]/d{2,4}[a-z]{2,4}[!*]'
+        if not re.fullmatch(valid_password_type, password, re.I):
+            raise TwitterError('Password does not follow security rules!')
+        user = User(username, password, bio)
+        user.save(self)
+        return user
         pass
 
     def get_user(self, user_id: int) -> User:
         """Devuelve el usuario con el user_id indicado.
         Si el usuario no existe hay elevar una excepción de tipo TwitterError con el mensaje:
         User with id <id> does not exist!"""
-        pass
+        get_username = cur.execute('SELECT * FROM user WHERE id=:user_id' dict(user_id=user_id)).fecthone()
+        if not get_username: 
+            raise TwitterError('User with id {id} does not exist!')
+        return User.from_db_row(get_username)
 
 
 class TwitterError(Exception):
-    pass
+    def __init__(self, message = ''):
+        error_mssg = message
+        super().__init__(error_mssg)
