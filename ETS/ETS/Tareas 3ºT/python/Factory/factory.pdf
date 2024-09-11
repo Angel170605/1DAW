@@ -1,0 +1,50 @@
+from abc import ABC, abstractmethod
+
+# Interfaz para definir los métodos necesarios para manejar un vehículo
+class Vehicle(ABC):
+    @abstractmethod
+    def drive(self):
+        pass
+
+# Clases concretas que implementan la interfaz Vehicle
+class Car(Vehicle):
+    def drive(self):
+        return "Driving a car"
+
+class Motorcycle(Vehicle):
+    def drive(self):
+        return "Riding a motorcycle"
+
+class Bicycle(Vehicle):
+    def drive(self):
+        return "Cycling a bicycle"
+
+# Factory Method para crear instancias de vehículos
+class VehicleFactory:
+    def create_vehicle(self, vehicle_type):
+        if vehicle_type == "car":
+            return Car()
+        elif vehicle_type == "motorcycle":
+            return Motorcycle()
+        elif vehicle_type == "bicycle":
+            return Bicycle()
+        else:
+            raise ValueError(f"Unknown vehicle type: {vehicle_type}")
+
+# Cliente
+def main():
+    factory = VehicleFactory()
+
+    car = factory.create_vehicle("car")
+    print(car.drive())  # Output: "Driving a car"
+
+    motorcycle = factory.create_vehicle("motorcycle")
+    print(motorcycle.drive())  # Output: "Riding a motorcycle"
+
+    bicycle = factory.create_vehicle("bicycle")
+    print(bicycle.drive())  # Output: "Cycling a bicycle"
+
+if __name__ == "__main__":
+    main()
+
+En este ejemplo, hemos creado una interfaz Vehicle con un método abstracto drive(). Luego, implementamos tres clases concretas (Car, Motorcycle y Bicycle) que heredan de Vehicle y proporcionan su propia implementación del método drive(). Finalmente, utilizamos el Factory Method (VehicleFactory) para crear instancias de vehículos según el tipo especificado.
