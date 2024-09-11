@@ -1,0 +1,326 @@
+.content {
+          border: none;
+          outline: none;
+          border-radius: 0.4rem;
+          margin-top: 50px;
+          display: flex;
+          flex-wrap: wrap; /* Añadido */
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+        }
+
+        .section {
+          color: white;
+          font-weight:700;
+          text-align: center;
+          width: 100%;
+          height: fit-content;
+          margin-top: 50px;
+          margin-bottom: 50px;
+          display: flex;
+          justify-content: center;
+      }
+      
+
+        .card {
+            margin-top: 50px;
+            margin-right: 50px;
+            margin-left: 50px;
+            position: relative;
+            width: 200px;
+            height: 300px;
+            background-color: linear-gradient(black, black) padding-box,
+              linear-gradient(145deg, transparent 15%, red, orange) border-box;
+            border: 1px solid orange;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+          }
+          
+          .card img, .card_ei img, .card_dc img, .card_ed img, .card_mc img, .card_cb img {
+            width: 30%;
+            fill: #333;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+          }
+          
+          .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          }
+          
+          .card__content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: black;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+          }
+          
+          .card:hover .card__content {
+            transform: translate(-50%, -50%) rotate(0deg);
+            opacity: 1;
+          }
+          
+          .card__title {
+            text-align: center;
+            margin: 0;
+            font-size: 24px;
+            color: orange;
+            font-weight: 700;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+          }
+          
+          .card__description {
+            text-align: center;
+            margin: 10px 0 0;
+            color: orange;
+            line-height: 1.4;
+            font-weight: 700;
+          }
+          
+          .card:hover svg {
+            scale: 0;
+            transform: rotate(-45deg);
+          }
+        .stats{
+          font-size: 10px;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .captain{
+          color: orange;
+          font-size: 10px;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+          font-weight: 700;
+        }
+        .card h1, .card_ei h1, .card_dc h1, .card_ed h1, .card_mc h1, .card_cb h1 {
+          font-weight: 700;
+          color: orange;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .card h3, .card_ei h3, .card_dc h3, .card_ed h3, .card_mc h3, .card_cb h3 {
+          font-weight: 700;
+          color: white;
+          font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        /*EXTREMO IZQUIERDO*/
+
+        .card_ei {
+          margin-top: 50px;
+          margin-right: 250px;
+          margin-left: 50px;
+          position: relative;
+          width: 200px;
+          height: 300px;
+          background-color: linear-gradient(black, black) padding-box,
+            linear-gradient(145deg, transparent 15%, red, orange) border-box;
+          border: 1px solid orange;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .card_ei:hover {
+          transform: scale(1.1);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card_ei:hover .card__content {
+          transform: translate(-50%, -50%) rotate(0deg);
+          opacity: 1;
+        }
+
+        /*CARTA DELANTERO CENTRO*/
+
+        .card_dc {
+          margin-top: 0px;
+          margin-right: 50px;
+          margin-left: 50px;
+          position: relative;
+          width: 200px;
+          height: 300px;
+          background-color: linear-gradient(black, black) padding-box,
+            linear-gradient(145deg, transparent 15%, red, orange) border-box;
+          border: 1px solid orange;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .card_dc img {
+          width: 30%;
+          fill: #333;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .card_dc:hover {
+          transform: scale(1.1);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card_dc:hover .card__content {
+          transform: translate(-50%, -50%) rotate(0deg);
+          opacity: 1;
+        }
+        
+        .card_dc:hover svg {
+          scale: 0;
+          transform: rotate(-45deg);
+        }
+        
+      /*CARTA EXTREMO DERECHO*/
+        
+        .card_ei:hover svg {
+          scale: 0;
+          transform: rotate(-45deg);
+        }
+
+      .card_ed {
+        margin-top: 50px;
+        margin-right: 50px;
+        margin-left: 250px;
+        position: relative;
+        width: 200px;
+        height: 300px;
+        background-color: linear-gradient(black, black) padding-box,
+          linear-gradient(145deg, transparent 15%, red, orange) border-box;
+        border: 1px solid orange;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+      }
+      
+      .card_ed img {
+        width: 30%;
+        fill: #333;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+      }
+      
+      .card_ed:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      
+      .card_ed:hover .card__content {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+      }
+      
+      
+      .card_ed:hover svg {
+        scale: 0;
+        transform: rotate(-45deg);
+      }
+
+    .card_ed h1 {
+      font-weight: 700;
+      color: orange;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+    .card_ed h3 {
+      font-weight: 700;
+      color: white;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    /*CARTA MEDIOCENTRO*/
+
+    .card_mc {
+      margin-top: 50px;
+      margin-right: 150px;
+      margin-left: 150px;
+      position: relative;
+      width: 200px;
+      height: 300px;
+      background-color: linear-gradient(black, black) padding-box,
+        linear-gradient(145deg, transparent 15%, red, orange) border-box;
+      border: 1px solid orange;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    
+    .card_mc img {
+      width: 30%;
+      fill: #333;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    
+    .card_mc:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card_mc:hover .card__content {
+      transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 1;
+    }
+    
+    .card_mc:hover svg {
+      scale: 0;
+      transform: rotate(-45deg);
+    }
+
+  /*CARTA DEFENSA*/
+
+  .card_cb {
+    margin-top: 150px;
+    margin-right: 75px;
+    margin-left: 75px;
+    position: relative;
+    width: 200px;
+    height: 300px;
+    background-color: linear-gradient(black, black) padding-box,
+      linear-gradient(145deg, transparent 15%, red, orange) border-box;
+    border: 1px solid orange;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .card_cb img {
+    width: 30%;
+    fill: #333;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .card_cb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card_cb:hover .card__content {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+  
+  .card_cb:hover svg {
+    scale: 0;
+    transform: rotate(-45deg);
+  }

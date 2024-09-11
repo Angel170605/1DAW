@@ -1,0 +1,98 @@
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: black;
+    color: orange;
+    font-family: impact;
+}
+
+.content{
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 10px;
+}
+
+.history, .players, .shop {
+    width: 295px;
+    height: 185px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: 35px;
+    text-decoration: none;
+    padding: 10px;
+    background-color: transparent;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.socialmedia {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    text-decoration: none;
+    border-radius: 35px;
+    border: 3px solid goldenrod;
+    text-decoration: none;
+    padding: 10px;
+    background-color: transparent;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+.news{
+    width: 700px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: 35px;
+    text-decoration: none;
+    padding: 10px;
+    background-color: transparent;
+    border: 3px solid green;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;;
+}
+
+.history a, .players a, .shop a{
+    text-decoration: none;
+    color: white;
+}
+
+.history{
+    border: 3px solid red;
+}
+.players{
+    border: 3px solid orangered;
+}
+
+.shop{
+    border: 3px solid goldenrod;
+}
+
+.history:hover, .players:hover, .shop:hover{
+    transform: translateY(-30px);
+    transition: 0.5s;
+}

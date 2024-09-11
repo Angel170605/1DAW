@@ -1,0 +1,42 @@
+.web_logo{
+    width: 150px;
+    height: 150px;
+    background-color: black;
+    float: left;
+    border-radius: 0.5rem;
+    
+}
+.index{
+    width: 1750px;
+    height: 150px;
+    background-image: linear-gradient(to right, #ff0000, rgb(255, 217, 0));
+    color: white;
+    float: right;
+    align-items: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.main{
+    width: 1905px;
+    height: 1000px;
+    margin-block-start: 5px;
+    background-color: black;
+    background-size: contain;
+    color: white;
+    display: inline-block;
+    border-radius: 0.5rem;
+}
+
+a:link{
+    text-decoration: none;
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;    
+}
+
+a:visited{
+    text-decoration: none;
+    color: white
+}
